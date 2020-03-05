@@ -26,11 +26,6 @@ class Engarde
             'ctl00$mainContent$UserName' => $this->config['username'],
             'ctl00$mainContent$Password' => $this->config['password']
         ]);
-
-//        $cookies = $client->getRequest()->getCookies();
-//        foreach ($cookies as $key => $value) {
-//            $request->addCookie($key, $value);
-//        }
     }
 
     public function getUsers(){
@@ -39,14 +34,6 @@ class Engarde
             $page[$p] = new Crawler(file_get_contents('usersFiles/'.$p.'.html'));
             $users = array_merge($users, $this->pullPageUsers($page[$p]));
         }
-//        $users = [
-////            [
-////                'engardeId' => 500983,
-////                'firstname' => 'Evan',
-////                'lastname' => 'Fronauer (Kevin Wood)',
-////                'active' => 1,
-////            ]
-//        ];
         $created = 0;
         foreach($users as $user){
             $existing = \App\User::where('options->engardeId', $user['engardeId'])->first();
